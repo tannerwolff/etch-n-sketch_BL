@@ -1,4 +1,5 @@
 const container = document.querySelector(".container");
+let colors = false;
 
 function createGrid(squares = 16) {
   for (let i = 0; i < squares * squares; i++) {
@@ -13,13 +14,13 @@ function createGrid(squares = 16) {
     item.style.height = item.style.width;
     item.addEventListener(
       "mouseenter",
-      () => (item.style.backgroundColor = "black"),
+      () => (item.style.backgroundColor = colors ? randomizeColor() : "black"),
     );
   });
 }
 createGrid();
 
-const button = document.querySelector("button");
+const button = document.querySelector(".button");
 
 function changeGridSize(squares) {
   button.addEventListener("click", () => {
@@ -33,3 +34,19 @@ function changeGridSize(squares) {
   });
 }
 changeGridSize();
+
+let colorButton = document.querySelector(".colors");
+colorButton.addEventListener("click", () => {
+  if (!colors) {
+    colors = true;
+  } else {
+    colors = false;
+  }
+});
+
+function randomizeColor() {
+  const r = Math.floor(Math.random() * 256);
+  const g = Math.floor(Math.random() * 256);
+  const b = Math.floor(Math.random() * 256);
+  return `rgb(${r}, ${g}, ${b})`;
+}
