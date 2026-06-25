@@ -1,8 +1,7 @@
-let squaresPerSide = 16;
 const container = document.querySelector(".container");
 
-function createDefaultGrid() {
-  for (let i = 0; i < squaresPerSide * squaresPerSide; i++) {
+function createGrid(squares = 16) {
+  for (let i = 0; i < squares * squares; i++) {
     const cell = document.createElement("div");
     cell.classList.add("grid-item");
     container.appendChild(cell);
@@ -10,7 +9,7 @@ function createDefaultGrid() {
 
   const items = document.querySelectorAll(".grid-item");
   items.forEach((item) => {
-    item.style.width = `calc(100% / 16)`;
+    item.style.width = `calc(100% / ${squares})`;
     item.style.height = item.style.width;
     item.addEventListener(
       "mouseenter",
@@ -18,4 +17,19 @@ function createDefaultGrid() {
     );
   });
 }
-createDefaultGrid();
+createGrid();
+
+const button = document.querySelector("button");
+
+function changeGridSize(squares) {
+  button.addEventListener("click", () => {
+    const userInput = prompt("How many squares per side? (under 100)");
+    if (userInput <= 100) {
+      container.replaceChildren();
+      createGrid(userInput);
+    } else {
+      alert("Please follow directions. Keep is below 100");
+    }
+  });
+}
+changeGridSize();
