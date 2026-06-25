@@ -24,11 +24,11 @@ const button = document.querySelector("button");
 function changeGridSize(squares) {
   button.addEventListener("click", () => {
     const userInput = prompt("How many squares per side? (under 100)");
-    if (userInput <= 100) {
+    if (userInput <= 100 && typeof +userInput === "number") {
       container.replaceChildren();
       createGrid(userInput);
     } else {
-      alert("Please follow directions. Keep is below 100");
+      alert("Please enter a NUMBER under 100!");
     }
   });
 }
